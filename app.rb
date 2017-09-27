@@ -13,7 +13,7 @@ post('/') do
   name = params.fetch("name")
   ingredient = params.fetch("ingredients")
   instruction = params.fetch("instructions")
-  @recipes = Recipe.create({:ingredient => ingredient, :instruction => instruction, :name => name})
+  recipes = Recipe.create({:ingredient => ingredient, :instruction => instruction, :name => name})
   @recipes = Recipe.all
   erb(:index)
 end
@@ -21,4 +21,10 @@ end
 get('/recipes/:id') do
   @recipes = Recipe.find(params.fetch(:id).to_i)
   erb(:recipes)
+end
+
+delete('/recipes/:id/delete') do
+  @recipe = Recipe.find(params[:id].to_i)
+  @recipe.destroy
+  redirect '/'
 end
