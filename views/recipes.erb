@@ -22,6 +22,9 @@
   <%= @recipes.instruction %>
 <% end %>
 
+<h4>Update Recipe</h4>
+<p>Oops! If you'd like to change a recipe, you can edit <a href="/recipe/<%= @recipes.id %>/edit">here.</a></p>
+
 <h4>Delete</h4>
 <form action="/recipes/<%= @recipes.id %>/delete" method="post">
   <p>If you're sure you don't like this recipe anymore, go ahead and click the button.</p>

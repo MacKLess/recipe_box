@@ -23,6 +23,17 @@ get('/recipes/:id') do
   erb(:recipes)
 end
 
+get('/recipes/:id/edit') do
+  @recipe = Recipe.find(params[:id].to_i)
+  erb(:recipe_edit)
+end
+
+patch('/recipes/:id/edit') do
+  @recipe = Recipe.find(params[:id].to_i)
+  @recipe.update({:name => name, :ingredient => ingredient, :instruction => :instruction})
+  redirect '/recipes/:id'
+end
+
 delete('/recipes/:id/delete') do
   @recipe = Recipe.find(params[:id].to_i)
   @recipe.destroy
