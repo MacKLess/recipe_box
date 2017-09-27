@@ -15,3 +15,12 @@ describe 'adding recipes to the mainpage', {:type => :feature} do
     expect(page).to have_content('scones')
   end
 end
+
+# describe 'access recipe detail page', {:type => :feature} do
+#   it 'click on recipe name to link to detail page' do
+#     recipe1 = Recipe.create({:name => 'scones', :ingredient => ['2.5 cups all-purpose flour', '1 Tbspoon baking powder'], :instruction => 'Heat oven to 425 degrees F (220 Celsius).', :id => nil})
+#     visit('/recipes')
+#     click_link(recipe1.name)
+#     expect(page).to have_content(recipe1)
+#   end
+# end
