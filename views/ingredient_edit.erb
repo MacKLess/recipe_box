@@ -1,0 +1,17 @@
+<h1>Edit Your Ingredient: <%= @recipe.ingredient.id %></h1>
+
+<form action="/recipe/<%= @recipe.id %>/edit" method="post">
+  <input type="hidden" name="_method" value="patch">
+  <div class="form-group">
+    <label for="ingredients">Change ingredient to:</label>
+    <input name="ingredients" type="text" value="">
+  </div>
+  <button type="submit" class="btn">Change</button>
+</form>
+
+<form action="/recipe/<%= @recipe.ingredient.id %>/delete" method="post">
+  <p>This ingredient will be removed from the recipe. Are you sure you want to delete it?</p>
+  <input type="hidden" name="_method" value="delete">
+  <button type="submit" class="btn">Delete</button>
+
+</form>

@@ -1,0 +1,24 @@
+<h1>Edit your <%= @recipe.name %> Recipe! </h1>
+
+<% if @recipe.ingredients.any? %>
+<p>You can click on each ingredient to change or delete from the recipe</p>
+  <% @recipe.ingredients.each do |ingredient| %>
+    <ul>
+      <li><a href="<%= ingredient.id %>"><%= ingredient.name %></a></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>There are no ingredients in this receipe! Please add them below!</p>
+<% end %>
+
+<h3>Add Ingredients to Recipe.</h3>
+<p>Add each ingredient separately. When you've entered the last one, click the "Done" button!</p>
+
+<form action="/recipe/<%= @recipe.id %>/edit" method="post">
+  <div class="form-group">
+    <label for="name">Add each ingredient:</label>
+    <input name="name" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn">Add!</button>
+</form>
+  <a href="/recipe/<%= @recipe.id %>"><button type="button" class="btn">Done!</button></a>
