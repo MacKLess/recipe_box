@@ -2,15 +2,24 @@
 
 <h2>Ingredients</h2>
 <% if @recipe.ingredients.any? %>
-<p>You can click on each ingredient to change or delete from the recipe</p>
+<p>Check those ingredients you would like to delete from the recipe. You can add new ingredients below.</p>
   <% @recipe.ingredients.each do |ingredient| %>
-    <ul>
-      <li><%= ingredient.food %></li>
-    </ul>
-  <% end %>
+  <form class="form-group" action="/recipe/<%= @recipe.id %>/edit/delete" method="post">
+    <input type="hidden" name="_method" value="delete">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="ingredient_ids[]" value="<%= ingredient.id %>">
+          <%= ingredient.food %>
+        </label>
+      </div>
+    <% end %>
+    <button type="submit" class="btn">Delete</button>
+  </form>
 <% else %>
   <p>There are no ingredients in this receipe! Please add them below!</p>
 <% end %>
+
+
 
 <h3>Add Ingredients to Recipe.</h3>
 <p>Add each ingredient separately. When you've entered the last one, click the "Done" button!</p>

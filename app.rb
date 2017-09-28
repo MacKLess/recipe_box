@@ -44,9 +44,22 @@ post('/recipe/:id/add_instruction') do
   erb(:recipe_edit)
 end
 
-
 delete('/recipe/:id/delete') do
   @recipe = Recipe.find(params[:id].to_i)
   @recipe.destroy
   redirect '/'
+end
+
+delete('/recipe/:id/edit/delete') do
+  @recipe = Recipe.find(params[:id].to_i)
+  @ingredients = @recipe.ingredients
+  ingredient_ids = params.fetch('ingredient_ids')
+  ingredient_ids.each do |ingredient_id|
+  checked_ingredient = Ingredient.find(ingredient_id)
+  @recipe.ingredients.destroy(checked_ingredient)
+  end
+  # checked_ingredients = Recipe.find(params[:ingredient_ids])
+  # checked_ingredients.where(:ingredient_ids [params:id]).destroy_all
+  @recipe.save
+  erb(:recipes)
 end
