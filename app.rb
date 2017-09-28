@@ -12,8 +12,6 @@ end
 
 post('/') do
   name = params.fetch("name")
-  # ingredient = params.fetch("ingredients")
-  # instruction = params.fetch("instructions")
   recipe = Recipe.create({:name => name})
   @recipes = Recipe.all
   erb(:index)
@@ -21,6 +19,7 @@ end
 
 get('/recipes/:id') do
   @recipe = Recipe.find(params.fetch(:id).to_i)
+  @ingredients = @recipe.ingredients
   erb(:recipes)
 end
 

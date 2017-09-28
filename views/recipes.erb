@@ -4,9 +4,9 @@
 
 <% if @recipe.ingredients.any? %>
 <p>You will need the following ingredients:</p>
-  <% @recipe.ingredients.each do |t| %>
+  <% @recipe.ingredients.each do |ingredient| %>
   <ul>
-    <li><%= t %></li>
+    <li><%= ingredient.name %></li>
   </ul>
   <% end %>
 <% else %>
