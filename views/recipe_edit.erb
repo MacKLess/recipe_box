@@ -1,10 +1,11 @@
 <h1>Edit your <%= @recipe.name %> Recipe! </h1>
 
+<h2>Ingredients</h2>
 <% if @recipe.ingredients.any? %>
 <p>You can click on each ingredient to change or delete from the recipe</p>
   <% @recipe.ingredients.each do |ingredient| %>
     <ul>
-      <li><a href="<%= ingredient.id %>"><%= ingredient.name %></a></li>
+      <li><%= ingredient.food %></li>
     </ul>
   <% end %>
 <% else %>
@@ -16,9 +17,30 @@
 
 <form action="/recipe/<%= @recipe.id %>/edit" method="post">
   <div class="form-group">
-    <label for="name">Add each ingredient:</label>
-    <input name="name" type="text" class="form-control">
+    <label for="food">Add each ingredient:</label>
+    <input name="food" type="text" class="form-control">
   </div>
   <button type="submit" class="btn">Add!</button>
 </form>
+
+<h2>Instructions</h2>
+
+<% if @recipe.instruction %>
+  <p>Follow these instructions carefully!</p>
+  <%= @recipe.instruction  %>
+<% else %>
+  <p>You can add the instructions below. Don't forget to include the amounts in the instructions!</p>
+  <%= @recipe.instruction %>
+<% end %>
+
+<h3>Add Instructions:</h3>
+
+<form action="/recipe/<%= @recipe.id %>/add_instruction" method="post">
+  <div class="form-group">
+    <label for="instructions">Add instructions:</label>
+    <input name="instructions" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn">Add!</button>
+</form>
+
   <a href="/recipes/<%= @recipe.id %>"><button type="button" class="btn">Done!</button></a>

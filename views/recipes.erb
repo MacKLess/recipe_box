@@ -6,7 +6,7 @@
 <p>You will need the following ingredients:</p>
   <% @recipe.ingredients.each do |ingredient| %>
   <ul>
-    <li><%= ingredient.name %></li>
+    <li><%= ingredient.food %></li>
   </ul>
   <% end %>
 <% else %>
@@ -17,13 +17,13 @@
 
 <% if @recipe.instruction %>
   <p>Follow these instructions carefully!</p>
+  <%= @recipe.instruction %>
 <% else %>
   <p>You forgot to include the instructions! You will probably need to edit!</p>
-  <%= @recipe.instruction %>
 <% end %>
 
 <h4>Update Recipe</h4>
-<p>Oops! If you haven't entered the ingredients and/or instructions yet, or if you'd like to change a pre-existing recipe, you can edit <a href="/recipe/<%= @recipe.id %>/edit">here.</a></p>
+<p>If you haven't entered the ingredients and/or instructions yet, or if you'd like to change a pre-existing recipe, you can edit <a href="/recipe/<%= @recipe.id %>/edit">here.</a></p>
 
 <h4>Delete</h4>
 <form action="/recipes/<%= @recipe.id %>/delete" method="post">

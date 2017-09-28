@@ -31,11 +31,18 @@ end
 
 post('/recipe/:id/edit') do
   @recipe = Recipe.find(params[:id].to_i)
-  @ingredients = Ingredient.create({:name => params.fetch('name')})
+  @ingredients = Ingredient.create({:food => params.fetch('food')})
   @recipe.ingredients.push(@ingredients)
+  @recipe.save
   erb(:recipe_edit)
 end
-  # @recipe.update({:name => name, :ingredient => ingredient, :instruction => :instruction})
+
+post('/recipe/:id/add_instruction') do
+  @recipe = Recipe.find(params[:id].to_i)
+  @recipe.instruction = params.fetch('instructions')
+  @recipe.save
+  erb(:recipe_edit)
+end
 
 
 delete('/recipe/:id/delete') do
