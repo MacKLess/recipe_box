@@ -20,6 +20,19 @@ end
 get('/recipes/:id') do
   @recipe = Recipe.find(params.fetch(:id).to_i)
   @ingredients = @recipe.ingredients
+  @tags = @recipe.tags
+  erb(:recipes)
+end
+
+post('/recipes/:id') do
+  @recipe = Recipe.find(params.fetch(:id).to_i)
+  @ingredients = @recipe.ingredients
+  meal = params.fetch("meal")
+  tag = Tag.create({:meal => meal})
+  card = Card.create({:recipe_id => @recipe.id, :tag_id => tag.id})
+  @recipe.save
+  # binding.pry
+  @tags = @recipe.tags
   erb(:recipes)
 end
 
@@ -58,8 +71,6 @@ delete('/recipe/:id/edit/delete') do
   checked_ingredient = Ingredient.find(ingredient_id)
   @recipe.ingredients.destroy(checked_ingredient)
   end
-  # checked_ingredients = Recipe.find(params[:ingredient_ids])
-  # checked_ingredients.where(:ingredient_ids [params:id]).destroy_all
   @recipe.save
   erb(:recipes)
 end

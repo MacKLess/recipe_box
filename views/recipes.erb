@@ -31,3 +31,32 @@
   <input type="hidden" name="_method" value="delete">
   <button type="submit" class="btn">Delete!</button>
 </form>
+
+<h3>Add a Tag!</h3>
+<p>Add a tag so you can search for this recipe later.</p>
+
+<% if @recipe.tags.any? %>
+<p>Use any of the following tags, or add a new tag below!</p>
+  <% @recipe.tags.each do |tag| %>
+  <form class="form-group" action="/recipes/<%= @recipe.id %>" method="post">
+      <div class="checkbox">
+        <label>
+          <input type="checkbox" name="tag_ids[]" value="<%= tag.id %>">
+          <%= tag.meal %>
+        </label>
+      </div>
+  <% end %>
+    <button type="submit" class="btn">Add tag!</button>
+  </form>
+<% else %>
+  <p>You should add some tags to use with your recipes!</p>
+<% end %>
+
+<h4>Create a Tag!</h4>
+<form action="/recipes/<%= @recipe.id %>" method="post">
+  <div class="form-group">
+    <label for="meal">Type of meal:</label>
+    <input name="meal" type="text" class="form-control">
+  </div>
+  <button type="submit" class="btn">Add Tag!</button>
+</form>
