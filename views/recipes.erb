@@ -1,10 +1,10 @@
-<h1><%= @recipes.name %></h1>
+<h1><%= @recipe.name %></h1>
 
 <h3>Ingredients</h3>
 
-<% if @recipes.ingredient.any? %>
+<% if @recipe.ingredients.any? %>
 <p>You will need the following ingredients:</p>
-  <% @recipes.ingredient.each do |t| %>
+  <% @recipe.ingredients.each do |t| %>
   <ul>
     <li><%= t %></li>
   </ul>
@@ -15,18 +15,18 @@
 
 <h3>Instructions</h3>
 
-<% if @recipes.instruction.empty? %>
-  <p>You forgot to include the instructions! You will probably need to edit!</p>
-<% else %>
+<% if @recipe.instruction %>
   <p>Follow these instructions carefully!</p>
-  <%= @recipes.instruction %>
+<% else %>
+  <p>You forgot to include the instructions! You will probably need to edit!</p>
+  <%= @recipe.instruction %>
 <% end %>
 
 <h4>Update Recipe</h4>
-<p>Oops! If you'd like to change a recipe, you can edit <a href="/recipe/<%= @recipes.id %>/edit">here.</a></p>
+<p>Oops! If you haven't entered the ingredients and/or instructions yet, or if you'd like to change a pre-existing recipe, you can edit <a href="/recipe/<%= @recipe.id %>/edit">here.</a></p>
 
 <h4>Delete</h4>
-<form action="/recipes/<%= @recipes.id %>/delete" method="post">
+<form action="/recipes/<%= @recipe.id %>/delete" method="post">
   <p>If you're sure you don't like this recipe anymore, go ahead and click the button.</p>
   <input type="hidden" name="_method" value="delete">
   <button type="submit" class="btn">Delete!</button>
